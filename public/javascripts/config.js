@@ -12,23 +12,24 @@ var require = {
   },
   // Third party code lives in js/lib
   paths: {
-    // --- start THREE sub-components
+    // --- requirejs plugins ---
+    text: '../../bower_components/text/text',
+    json: '../../bower_components/requirejs-plugins/src/json',
+    // -------------------------
 
+    // --- start THREE sub-components ---
     three: '../lib/three',
-    // three: '../../bower_components/threejs/build/three',
-
-    // threeCore: '../lib/three.min',
-    threeCore: '../../bower_components/threejs/build/three.min',
-
+    threeCore: '../../bower_components/threejs/build/three',
     TrackballControls: '../../bower_components/three.js-controls/src/TrackballControls',
-    // --- end THREE sub-components
+    // ----------------------------------
 
     detector: '../lib/Detector',
     stats: '../lib/stats.min',
     // Require.js plugins
-    text: '../../bower_components/text/text',
     shader: '../lib/shader',
     // Where to look for shader files
-    shaders: '../shaders'
+    shaders: '../shaders',
+
+    assets: '../../assets',
   }
 };
