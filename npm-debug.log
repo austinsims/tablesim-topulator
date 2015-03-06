@@ -1,0 +1,111 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\ProgramData\\chocolatey\\lib\\nodejs.commandline.0.10.33\\tools\\node.exe',
+1 verbose cli   'C:\\ProgramData\\chocolatey\\lib\\npm.1.4.9\\tools\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@1.4.9
+3 info using node@v0.10.33
+4 warn package.json cards@0.0.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ 'C:\\Users\\asims\\projects\\cards',
+6 verbose install   [ 'express',
+6 verbose install     'express-writer',
+6 verbose install     'consolidate',
+6 verbose install     'handlebars',
+6 verbose install     'less-middleware',
+6 verbose install     'matchdep',
+6 verbose install     'mkdirp',
+6 verbose install     'grunt',
+6 verbose install     'grunt-exec',
+6 verbose install     'karma-firefox-launcher',
+6 verbose install     'karma-script-launcher',
+6 verbose install     'karma-chrome-launcher',
+6 verbose install     'karma-html2js-preprocessor',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-requirejs',
+6 verbose install     'karma-coffee-preprocessor',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'karma',
+6 verbose install     'grunt-karma',
+6 verbose install     'phantomjs',
+6 verbose install     'karma-ng-scenario',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-develop',
+6 verbose install     'grunt-mkdir',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-nodemon' ] ]
+7 info preinstall cards@0.0.0
+8 warn package.json consolidate@0.9.1 No repository field.
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping express@3.4.4 C:\Users\asims\projects\cards
+11 verbose already installed skipping express-writer@0.0.4 C:\Users\asims\projects\cards
+12 verbose already installed skipping consolidate@~0.9.1 C:\Users\asims\projects\cards
+13 verbose already installed skipping handlebars@1.1.2 C:\Users\asims\projects\cards
+14 verbose already installed skipping less-middleware@~0.1.14 C:\Users\asims\projects\cards
+15 verbose already installed skipping matchdep@~0.1.2 C:\Users\asims\projects\cards
+16 verbose already installed skipping mkdirp@~0.3.5 C:\Users\asims\projects\cards
+17 verbose already installed skipping grunt@~0.4.1 C:\Users\asims\projects\cards
+18 verbose already installed skipping grunt-exec@~0.4.2 C:\Users\asims\projects\cards
+19 verbose already installed skipping karma-firefox-launcher@~0.1.0 C:\Users\asims\projects\cards
+20 verbose already installed skipping karma-script-launcher@~0.1.0 C:\Users\asims\projects\cards
+21 verbose already installed skipping karma-chrome-launcher@~0.1.0 C:\Users\asims\projects\cards
+22 verbose already installed skipping karma-html2js-preprocessor@~0.1.0 C:\Users\asims\projects\cards
+23 verbose already installed skipping karma-jasmine@~0.1.0 C:\Users\asims\projects\cards
+24 verbose already installed skipping karma-requirejs@~0.1.0 C:\Users\asims\projects\cards
+25 verbose already installed skipping karma-coffee-preprocessor@~0.1.0 C:\Users\asims\projects\cards
+26 verbose already installed skipping karma-phantomjs-launcher@~0.1.0 C:\Users\asims\projects\cards
+27 verbose already installed skipping karma@~0.10.1 C:\Users\asims\projects\cards
+28 verbose already installed skipping grunt-karma@~0.6.1 C:\Users\asims\projects\cards
+29 verbose already installed skipping phantomjs@~1.9 C:\Users\asims\projects\cards
+30 verbose already installed skipping karma-ng-scenario@~0.1.0 C:\Users\asims\projects\cards
+31 verbose already installed skipping grunt-contrib-copy@~0.4.1 C:\Users\asims\projects\cards
+32 verbose already installed skipping grunt-develop@~0.2.2 C:\Users\asims\projects\cards
+33 verbose already installed skipping grunt-mkdir@~0.1.1 C:\Users\asims\projects\cards
+34 verbose already installed skipping grunt-contrib-clean@~0.5.0 C:\Users\asims\projects\cards
+35 verbose already installed skipping grunt-nodemon@~0.1.2 C:\Users\asims\projects\cards
+36 silly resolved []
+37 info build C:\Users\asims\projects\cards
+38 verbose linkStuff [ false, false, false, 'C:\\Users\\asims\\projects' ]
+39 info linkStuff cards@0.0.0
+40 verbose linkBins cards@0.0.0
+41 verbose linkMans cards@0.0.0
+42 verbose rebuildBundles cards@0.0.0
+43 verbose rebuildBundles [ '.bin',
+43 verbose rebuildBundles   'consolidate',
+43 verbose rebuildBundles   'express',
+43 verbose rebuildBundles   'express-writer',
+43 verbose rebuildBundles   'grunt',
+43 verbose rebuildBundles   'grunt-contrib-clean',
+43 verbose rebuildBundles   'grunt-contrib-copy',
+43 verbose rebuildBundles   'grunt-develop',
+43 verbose rebuildBundles   'grunt-exec',
+43 verbose rebuildBundles   'grunt-karma',
+43 verbose rebuildBundles   'grunt-mkdir',
+43 verbose rebuildBundles   'grunt-nodemon',
+43 verbose rebuildBundles   'handlebars',
+43 verbose rebuildBundles   'karma',
+43 verbose rebuildBundles   'karma-chrome-launcher',
+43 verbose rebuildBundles   'karma-coffee-preprocessor',
+43 verbose rebuildBundles   'karma-firefox-launcher',
+43 verbose rebuildBundles   'karma-html2js-preprocessor',
+43 verbose rebuildBundles   'karma-jasmine',
+43 verbose rebuildBundles   'karma-ng-scenario',
+43 verbose rebuildBundles   'karma-phantomjs-launcher',
+43 verbose rebuildBundles   'karma-requirejs',
+43 verbose rebuildBundles   'karma-script-launcher',
+43 verbose rebuildBundles   'less-middleware',
+43 verbose rebuildBundles   'matchdep',
+43 verbose rebuildBundles   'mkdirp',
+43 verbose rebuildBundles   'phantomjs' ]
+44 info install cards@0.0.0
+45 info postinstall cards@0.0.0
+46 verbose unsafe-perm in lifecycle true
+47 info prepublish cards@0.0.0
+48 error peerinvalid The package karma-requirejs does not satisfy its siblings' peerDependencies requirements!
+48 error peerinvalid Peer karma@0.10.10 wants karma-requirejs@~0.2.0
+49 error System Windows_NT 6.1.7601
+50 error command "C:\\ProgramData\\chocolatey\\lib\\nodejs.commandline.0.10.33\\tools\\node.exe" "C:\\ProgramData\\chocolatey\\lib\\npm.1.4.9\\tools\\node_modules\\npm\\bin\\npm-cli.js" "install"
+51 error cwd C:\Users\asims\projects\cards
+52 error node -v v0.10.33
+53 error npm -v 1.4.9
+54 error code EPEERINVALID
+55 verbose exit [ 1, true ]
