@@ -4,6 +4,8 @@
   "dependencies": {
     "threejs": "*",
     "lodash": "~3.4.0",
-    "requirejs": "~2.1.16"
+    "requirejs": "~2.1.16",
+    "three.js-controls": "~0.0.67",
+    "text": "~2.0.14"
   }
 }

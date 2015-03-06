@@ -13,14 +13,20 @@ var require = {
   // Third party code lives in js/lib
   paths: {
     // --- start THREE sub-components
+
     three: '../lib/three',
-    threeCore: '../lib/three.min',
-    TrackballControls: '../lib/controls/TrackballControls',
+    // three: '../../bower_components/threejs/build/three',
+
+    // threeCore: '../lib/three.min',
+    threeCore: '../../bower_components/threejs/build/three.min',
+
+    TrackballControls: '../../bower_components/three.js-controls/src/TrackballControls',
     // --- end THREE sub-components
+
     detector: '../lib/Detector',
     stats: '../lib/stats.min',
     // Require.js plugins
-    text: '../lib/text',
+    text: '../../bower_components/text/text',
     shader: '../lib/shader',
     // Where to look for shader files
     shaders: '../shaders'
