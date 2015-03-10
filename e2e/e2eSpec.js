@@ -6,7 +6,7 @@ describe('End to end tests for cards', function() {
 
   it('should render the root', function() {
     browser().navigateTo('/');
-    expect(element('title').text()).toBe("Simultop Tabulator");
+    expect(element('title').text()).toBe("Tablesim Topulator");
   });
 
 });

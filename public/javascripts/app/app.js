@@ -1,5 +1,6 @@
 define( ["three", "camera", "controls", "geometry", "light", "material", "renderer", "scene"],
 function ( THREE, camera, controls, geometry, light, material, renderer, scene ) {
+  "use strict";
 
 
   // Move the specified Object3D so that it is centered on the origin
@@ -15,11 +16,14 @@ function ( THREE, camera, controls, geometry, light, material, renderer, scene )
     meshes: [],
     init: function () {
 
-      var board = new THREE.Mesh(geometry['board'], material['board']);
+      var board = new THREE.Mesh(geometry.board, material.board);
+      var card = new THREE.Mesh(geometry.card, material.solid);
+      card.position.y = 10;
       centerOnOrigin(board);
       scene.add(board);
+      scene.add(card);
       
-      scene.add(new THREE.AxisHelper(200))
+      scene.add(new THREE.AxisHelper(200));
 
     },
     animate: function () {
