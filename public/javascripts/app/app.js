@@ -17,7 +17,7 @@ function ( THREE, camera, controls, geometry, light, material, renderer, scene )
     init: function () {
 
       var board = new THREE.Mesh(geometry.board, material.board);
-      var card = new THREE.Mesh(geometry.card, material.solid);
+      var card = new THREE.Mesh(geometry.card, material.card);
       card.position.y = 10;
       centerOnOrigin(board);
       scene.add(board);

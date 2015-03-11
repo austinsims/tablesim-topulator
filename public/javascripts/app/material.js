@@ -22,6 +22,10 @@ define( ["three", "shader!simple.vert", "shader!simple.frag", "texture"], functi
     // custom materials
     board: new THREE.MeshLambertMaterial({
       map: texture.board
+    }),
+
+    card: new THREE.MeshPhongMaterial({
+      map: texture.card
     })
   };
 });
