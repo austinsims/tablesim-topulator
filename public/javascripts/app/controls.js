@@ -1,5 +1,7 @@
-define(["three", "camera", "container", "renderer", "objects"], function(THREE, camera, container, renderer, objects) {
+define(["three", "lodash", "camera", "container", "renderer", "objects"], function(THREE, _, camera, container, renderer, objects) {
     'use strict';
+
+    var PICK_UP_LENGTH = 3;
 
     var controls = new THREE.OrbitControls(camera, container);
     var projector = new THREE.Projector();
@@ -48,14 +50,51 @@ define(["three", "camera", "container", "renderer", "objects"], function(THREE, 
 
     // Set up event listeners
 
+    var pickedUpObject = null;
+
     window.addEventListener('mousedown', function(event) {
         var mouse3d = getMouse3d(event);
+
+        // Disable LMB to rotate if mouse click was on the board.
         controls.noRotate = isPosOnObject({pos: mouse3d, object: objects.board});
+
+        // Look for an object to pick up. (for now the only object to check is one card)
+        // TODO: Move "moveableObjects" to objects.js, somewhere else in this file, or its own
+        var moveableObjects = [objects.card];
+        pickedUpObject = _.find(moveableObjects, function(object) {
+        	return isPosOnObject({pos: mouse3d, object: object});
+        });
+
+        if (pickedUpObject) {
+        	pickedUpObject.position.y += PICK_UP_LENGTH;
+        	// Start dragging.
+        	window.addEventListener('mousemove', onMouseMove);
+        }
+
     });
+
+
+    var onMouseMove = function(event) {
+    	var mouse3d = getMouse3d(event);
+
+    	// drag picked up object, if any
+    	if (pickedUpObject) {
+    		pickedUpObject.position.x = mouse3d.x;
+    		pickedUpObject.position.z = mouse3d.z;
+    	}
+    };
 
 
     window.addEventListener('mouseup', function(event) {
         controls.noRotate = false;
+
+        // drop picked up object, if any
+        if (pickedUpObject) {
+	        pickedUpObject.position.y -= PICK_UP_LENGTH;
+	        pickedUpObject = null;
+	        // Stop dragging.
+	        window.removeEventListener('mousemove', onMouseMove);
+	    }
     });
 
     return controls;
