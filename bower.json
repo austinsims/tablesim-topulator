@@ -7,6 +7,7 @@
     "requirejs": "~2.1.16",
     "three.js-controls": "~0.0.67",
     "text": "~2.0.14",
-    "requirejs-plugins": "~1.0.3"
+    "requirejs-plugins": "~1.0.3",
+    "threejs-examples": "*"
   }
 }

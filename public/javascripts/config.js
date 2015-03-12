@@ -7,6 +7,7 @@ var require = {
     'threeCore': { exports: 'THREE' },
     'TrackballControls': { deps: ['threeCore'], exports: 'THREE' },
     'OrbitControls': { deps: ['threeCore'], exports: 'THREE' },
+    'Projector': { deps: ['threeCore'], exports: 'THREE'},
     // --- end THREE sub-components
     'detector': { exports: 'Detector' },
     'stats': { exports: 'Stats' }
@@ -23,7 +24,13 @@ var require = {
     threeCore: '../../bower_components/threejs/build/three',
     TrackballControls: '../../bower_components/three.js-controls/src/TrackballControls',
     OrbitControls: '../../bower_components/three.js-controls/src/OrbitControls',
+    Projector: '../../bower_components/threejs-examples/examples/js/renderers/Projector',
+
     // ----------------------------------
+
+    // --- other libs ---
+    lodash: '../../bower_components/lodash/lodash',
+    // ------
 
     detector: '../lib/Detector',
     stats: '../lib/stats.min',

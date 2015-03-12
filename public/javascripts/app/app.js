@@ -1,39 +1,115 @@
-define( ["three", "camera", "controls", "geometry", "light", "material", "renderer", "scene"],
-function ( THREE, camera, controls, geometry, light, material, renderer, scene ) {
-  "use strict";
+define(
+    [
+        // THREE
+        "three",
+
+        // Other libs
+        "lodash",
+
+        // App modules
+        "camera",
+        "controls",
+        "geometry",
+        "light",
+        "material",
+        "renderer",
+        "scene",
+        "objects",
+        "container"
+    ],
+    function(
+        THREE,
+        _,
+        camera,
+        controls,
+        geometry,
+        light,
+        material,
+        renderer,
+        scene,
+        objects,
+        container
+    ) {
+        "use strict";
+
+        var getMouse3d = (function() {
+          var projector = new THREE.Projector();
+
+          return function(mouseEvent) {
+
+            // Try both props for browser compatibility
+            var x = mouseEvent.offsetX || mouseEvent.layerX;
+            var y = mouseEvent.offsetY || mouseEvent.layerY;
+
+            var pos = new THREE.Vector3(0,0,0);
+            var pMouse = new THREE.Vector3(
+               (x / renderer.domElement.width) * 2 - 1,
+              -(y / renderer.domElement.height) * 2 + 1,
+               1
+            );
+
+            projector.unprojectVector(pMouse, camera);
+
+            var cam = camera.position;
+            var m = pMouse.y / ( pMouse.y - cam.y );
+
+            pos.x = pMouse.x + ( cam.x - pMouse.x ) * m;
+            pos.z = pMouse.z + ( cam.z - pMouse.z ) * m;
+
+            return pos;
+          };
+
+        })();
 
 
-  // Move the specified Object3D so that it is centered on the origin
-  // with respect to  x  and  z.  y is not modified.
-  function centerOnOrigin(object3d) {
-    var boundingBox = new THREE.Box3().setFromObject(object3d);
-    var center = boundingBox.center();
-    object3d.position.x = -center.x;
-    object3d.position.z = -center.z;
-  }
+        var isMouseOnBoard = (function() {
+            var boardBoundingBox = new THREE.Box3().setFromObject(objects.board);
+            var min = boardBoundingBox.min;
+            var max = boardBoundingBox.max;
 
-  var app = {
-    meshes: [],
-    init: function () {
+            return function(pos) {
+                return true && pos.x >= min.x && pos.x <= max.x && pos.z >= min.z && pos.z <= max.z;
+            };
 
-      var board = new THREE.Mesh(geometry.board, material.board);
-      var card = new THREE.Mesh(geometry.card, material.card);
-      card.position.y = 10;
-      centerOnOrigin(board);
-      scene.add(board);
-      scene.add(card);
-      
-      scene.add(new THREE.AxisHelper(200));
+        })();
 
-    },
-    animate: function () {
-      window.requestAnimationFrame( app.animate );
-      controls.update();
+        // Set up event listeners
+        var onMouseDown = function(event) {
+            var mouse3d = getMouse3d(event);
+            if (isMouseOnBoard(mouse3d)) {
+                controls.noRotate = true;
+            }
+        };
+        window.addEventListener('mousedown', onMouseDown);
 
-      // Any constant animations go here
 
-      renderer.render( scene, camera );
-    }
-  };
-  return app;
-} );
+        var onMouseUp = function(event) {
+            controls.noRotate = false;
+        };
+        window.addEventListener('mouseup', onMouseUp);
+
+
+        var app = {
+            meshes: [],
+            init: function() {
+
+                var card = new THREE.Mesh(geometry.card, material.card);
+                card.position.x = 40;
+                card.position.z = 40;
+                scene.add(objects.board);
+                scene.add(card);
+
+                scene.add(new THREE.AxisHelper(200));
+
+            },
+            animate: function() {
+                window.requestAnimationFrame(app.animate);
+                controls.update();
+
+                // Any constant animations go here
+
+                renderer.render(scene, camera);
+            }
+        };
+        return app;
+    });
