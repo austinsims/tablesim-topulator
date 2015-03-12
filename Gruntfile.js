@@ -4,7 +4,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-develop');
   grunt.loadNpmTasks('grunt-exec');
-  grunt.loadNpmTasks('grunt-karma');
+  // don't try to do UI tests
+  //grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-nodemon');
 
@@ -34,6 +35,7 @@ module.exports = function (grunt) {
         cmd: 'bower install'
       }
     },
+    /* 
     karma: {
       e2e: {
         configFile: 'karma-e2e.conf.js',
@@ -49,6 +51,7 @@ module.exports = function (grunt) {
         autoWatch: true
       }
     },
+    */
     copy: {
       dist: {
         files: [
@@ -94,7 +97,7 @@ module.exports = function (grunt) {
     'develop:distServer',
     'clean',
     'mkdir:dist',
-    'karma:e2e',
+    //'karma:e2e',
     'copy:dist'
   ]);
 
