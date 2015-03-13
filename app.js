@@ -1,16 +1,11 @@
-/**
- * Setup and run our Express server
- *
- * This server is used during development and is not necessary for production
- * once all static files have been rendered out
- */
-
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var writer = require('express-writer');
 var cons = require('consolidate');
+
+var SocketioServer = require('socket.io');
 
 var fs = require('fs');
 var hbs = require('handlebars');
@@ -74,4 +69,34 @@ server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
   console.log('Node environment is ' + app.get('env'));
+});
+
+// web sockets
+var io = new SocketioServer(server);
+io.on('connection', function(socket) {
+  var username;
+
+  console.log('a user connected');
+
+  socket.on('disconnect', function() {
+    console.log('a user disconnected');
+  });
+
+  socket.on('registration', function(msg) {
+    username = msg.username;
+  });
+
+  socket.on('chat message', function(msg) {
+    // Don't process message before registration.
+    if (!username) return;
+
+    // TODO: look into using broadcast and optimistic adding of message to 
+    // client side list before server deals with it.
+    // broadcast message to all clients except the sender
+    // socket.broadcast.emit(msg);
+
+    // for simplicity, send message to all connected clients including the sender
+    io.emit('chat message', msg);
+  });
+
 });

@@ -13,7 +13,7 @@ define(
         "renderer",
         "scene",
         "objects",
-        "container"
+        "container",
     ],
     function(
         THREE,
@@ -46,5 +46,8 @@ define(
                 renderer.render(scene, camera);
             }
         };
+
+
+
         return app;
     });

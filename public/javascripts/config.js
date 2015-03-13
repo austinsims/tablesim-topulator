@@ -10,7 +10,8 @@ var require = {
     'Projector': { deps: ['threeCore'], exports: 'THREE'},
     // --- end THREE sub-components
     'detector': { exports: 'Detector' },
-    'stats': { exports: 'Stats' }
+    'stats': { exports: 'Stats' },
+    'socketio': { exports: 'io' }
   },
   // Third party code lives in js/lib
   paths: {
@@ -30,6 +31,8 @@ var require = {
 
     // --- other libs ---
     lodash: '../../bower_components/lodash/lodash',
+    jquery: '../../bower_components/jquery/dist/jquery.min',
+    socketio: '../../bower_components/socket.io-client/socket.io',
     // ------
 
     detector: '../lib/Detector',

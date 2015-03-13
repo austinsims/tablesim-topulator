@@ -1,14 +1,76 @@
-html, body {
-  height: 100%;
+html, body, #game {
+    height: 100%;
+    width: 100%;
 }
 
 body {
-  margin: 0;
-  overflow: hidden;
+    margin: 0;
+    overflow: hidden;
+}
+
+#game {
+    display: table;
+}
+
+#splash {
+    // position: absolute:
+    // top: 50px;
+    // left: 50px;
+    // z-index: 1;
 }
 
 #threejs-container {
-  width: 100%;
-  height: 100%;
-  background: #e6e0cf;
+    display: table-cell;
+    width: 80%;
+    height: 100%;
+    background: #e6e0cf;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#chat {
+    display: table-cell;
+    vertical-align: top;
+    width: 20%;
+    padding: 0.5em;
+}
+
+.chat-expand-collapse-button {
+    position: absolute;
+    z-index: 2;
+    bottom: 5px;
+    right: 5px;
+}
+
+// TODO style chat
+form {
+
+    input {
+
+    }
+
+    button {
+
+    }
+
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        padding: 5px 10px;
+    }
+
+    li:nth-child(odd) {
+        background: #eee;
+    }
 }

@@ -7,6 +7,27 @@
         <script data-main="../main" src="bower_components/requirejs/require.js"></script>
     </head>
     <body>
-        <div id="threejs-container">Generating world...</div>
+        <div id="splash">
+            <form action="">
+                <label>What is your name?</label>
+                <input type="text" name="username" autocomplete="off" />
+                <button>Play!</button>
+            </form>
+        </div>
+
+        <div id="game" style="visibility:hidden;">
+            <div id="threejs-container">
+            	<div class="chat-expand-collapse-button">
+            		<button id="hideShowChat">&gt;&gt;</button>
+            	</div>
+            </div>
+            <div id="chat">
+                <form action="">
+                    <input placeholder="chat" id="m" autocomplete="off" />
+                    <button>Send</button>
+                </form>
+                <ul id="messages"></ul>
+            </div>
+        </div>
     </body>
 </html>
