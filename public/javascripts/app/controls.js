@@ -1,4 +1,4 @@
-define(["three", "lodash", "camera", "container", "renderer", "objects"], function(THREE, _, camera, container, renderer, objects) {
+define(["three", "lodash", "camera", "container", "renderer", "objects", "moveables"], function(THREE, _, camera, container, renderer, objects, moveables) {
     'use strict';
 
     var PICK_UP_LENGTH = 3;
@@ -50,7 +50,7 @@ define(["three", "lodash", "camera", "container", "renderer", "objects"], functi
 
     // Set up event listeners
 
-    var pickedUpObject = null;
+    var pickedUpMoveable = null;
 
     window.addEventListener('mousedown', function(event) {
         var mouse3d = getMouse3d(event);
@@ -60,15 +60,18 @@ define(["three", "lodash", "camera", "container", "renderer", "objects"], functi
 
         // Look for an object to pick up. (for now the only object to check is one card)
         // TODO: Move "moveableObjects" to objects.js, somewhere else in this file, or its own
-        var moveableObjects = [objects.card];
-        pickedUpObject = _.find(moveableObjects, function(object) {
-        	return isPosOnObject({pos: mouse3d, object: object});
+        var moveableObjects = [moveables.card];
+        pickedUpMoveable = _.find(moveableObjects, function(moveable) {
+        	return isPosOnObject({pos: mouse3d, object: moveable.object});
         });
 
-        if (pickedUpObject) {
-        	pickedUpObject.position.y += PICK_UP_LENGTH;
+        if (pickedUpMoveable) {
+            var currentY = pickedUpMoveable.object.position.y;
+        	pickedUpMoveable.move({y: currentY + PICK_UP_LENGTH});
+
         	// Start dragging.
         	window.addEventListener('mousemove', onMouseMove);
+
         }
 
     });
@@ -78,9 +81,8 @@ define(["three", "lodash", "camera", "container", "renderer", "objects"], functi
     	var mouse3d = getMouse3d(event);
 
     	// drag picked up object, if any
-    	if (pickedUpObject) {
-    		pickedUpObject.position.x = mouse3d.x;
-    		pickedUpObject.position.z = mouse3d.z;
+    	if (pickedUpMoveable) {
+            pickedUpMoveable.move({x: mouse3d.x, z: mouse3d.z});
     	}
     };
 
@@ -89,13 +91,17 @@ define(["three", "lodash", "camera", "container", "renderer", "objects"], functi
         controls.noRotate = false;
 
         // drop picked up object, if any
-        if (pickedUpObject) {
-	        pickedUpObject.position.y -= PICK_UP_LENGTH;
-	        pickedUpObject = null;
+        if (pickedUpMoveable) {
+            var currentY = pickedUpMoveable.object.position.y;
+	        pickedUpMoveable.move({y: currentY - PICK_UP_LENGTH});
+	        pickedUpMoveable = null;
 	        // Stop dragging.
 	        window.removeEventListener('mousemove', onMouseMove);
 	    }
     });
+
+    // Observe card position and tell server about it.
+
 
     return controls;
 });

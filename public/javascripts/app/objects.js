@@ -17,5 +17,9 @@ define(["three", "geometry", "material"], function(THREE, geometry, material) {
 
     objects.card = new THREE.Mesh(geometry.card, material.card);
 
+    // *** debug ***
+    window.card = objects.card;
+    // ******
+
     return objects;
 });

@@ -1,13 +1,49 @@
 html,
-body {
+body,
+#game {
   height: 100%;
+  width: 100%;
 }
 body {
   margin: 0;
   overflow: hidden;
 }
+#game {
+  display: table;
+}
 #threejs-container {
-  width: 100%;
+  display: table-cell;
+  width: 80%;
   height: 100%;
   background: #e6e0cf;
+  position: relative;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+#chat {
+  display: table-cell;
+  vertical-align: top;
+  width: 20%;
+  padding: 0.5em;
+}
+.chat-expand-collapse-button {
+  position: absolute;
+  z-index: 2;
+  bottom: 5px;
+  right: 5px;
+}
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#messages li {
+  padding: 5px 10px;
+}
+#messages li:nth-child(odd) {
+  background: #eee;
 }
