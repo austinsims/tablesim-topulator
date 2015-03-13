@@ -29,15 +29,19 @@ define(["objects", "socket", "lodash"], function(objects, socket, _) {
 				});
 			}
 		};
+
+		socket.on('move', function(msg) {
+			self.object.position.x = msg.x;
+			self.object.position.y = msg.y;
+			self.object.position.z = msg.z;
+		});
+
 	};
 
 	var moveables = {
 		card: new Moveable(objects.card)
 	};
 
-	socket.on('move', function(msg) {
-		moveables.card.move(msg);
-	});
 
 	return moveables;
 
