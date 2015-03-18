@@ -1,6 +1,9 @@
 .idea/
+.vagrant/
 dist
 *.iml
 .DS_STORE
 node_modules
+*.log
 public/bower_components
+public/stylesheets
