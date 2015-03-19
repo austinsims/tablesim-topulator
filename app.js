@@ -1,3 +1,5 @@
+// asdf
+
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
@@ -97,6 +99,11 @@ io.on('connection', function(socket) {
 
     // for simplicity, send message to all connected clients including the sender
     io.emit('chat message', msg);
+  });
+
+  socket.on('move', function(msg) {
+    console.log(JSON.stringify(msg));
+    socket.broadcast.emit('move', msg);
   });
 
 });
