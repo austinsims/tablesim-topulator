@@ -11,8 +11,11 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
 
 			// Hook up form submit to send chat message
 			$('#chat form').submit(function() {
+				var message = $('#m').val();
+				if (!message) return false;
+
 				socket.emit('chat message', {
-					message: $('#m').val(),
+					message: message,
 					username: username
 				});
 				$('#m').val('');
@@ -21,6 +24,10 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
 
 			socket.on('chat message', function(msg) {
 				$('#messages').append($('<li>').text(msg.username + ': ' + msg.message));
+			});
+
+			socket.on('userlist', function(msg) {
+				console.log('userlist: ' + msg);
 			});
 
 		},

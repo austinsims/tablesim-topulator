@@ -6,6 +6,8 @@ var http = require('http');
 var path = require('path');
 var writer = require('express-writer');
 var cons = require('consolidate');
+var redis = require('redis');
+var _ = require('lodash');
 
 var SocketioServer = require('socket.io');
 
@@ -73,6 +75,13 @@ server.listen(app.get('port'), function(){
   console.log('Node environment is ' + app.get('env'));
 });
 
+// redis client
+var redisClient = redis.createClient();
+redisClient.on('connect', function() {
+  var userlist = [];
+  redisClient.set('userlist', JSON.stringify(userlist));
+});
+
 // web sockets
 var io = new SocketioServer(server);
 io.on('connection', function(socket) {
@@ -82,10 +91,25 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('a user disconnected');
+    if (!username) return;
+    redisClient.get('userlist', function(err, reply) {
+      var userlist = JSON.parse(reply);
+      _.remove(userlist, function(u) {
+        return u === username;
+      });
+      redisClient.set('userlist', JSON.stringify(userlist));
+      io.emit('userlist', userlist);
+    });
   });
 
   socket.on('registration', function(msg) {
     username = msg.username;
+    redisClient.get('userlist', function(err, reply) {
+      var userlist = JSON.parse(reply);
+      userlist.push(username);
+      redisClient.set('userlist', JSON.stringify(userlist));
+      io.emit('userlist', userlist);
+    });
   });
 
   socket.on('chat message', function(msg) {
