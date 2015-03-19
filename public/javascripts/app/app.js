@@ -34,7 +34,6 @@ define(
 
                 scene.add(objects.board);
                 scene.add(objects.card);
-                scene.add(new THREE.AxisHelper(200));
 
             },
             animate: function() {

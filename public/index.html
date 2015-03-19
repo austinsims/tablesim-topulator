@@ -9,22 +9,30 @@
     <body>
         <div id="splash">
             <label>What is your name?</label>
-            <input type="text" name="username" autocomplete="off" />
+            <input type="text" name="username" autofocus/>
             <button>Play!</button>
         </div>
 
         <div id="game" style="visibility:hidden;">
             <div id="threejs-container">
+                <!--
             	<div class="chat-expand-collapse-button">
             		<button id="hideShowChat">&gt;&gt;</button>
             	</div>
+                -->
             </div>
             <div id="chat">
+                <div id="controls">
+                    <h4>Players</h4>
+                    <ul id="userlist">
+                    </ul>
+                </div>
+                <ul id="messages">
+                </ul>
                 <form action="">
                     <input placeholder="chat" id="m" autocomplete="off" />
                     <button>Send</button>
                 </form>
-                <ul id="messages"></ul>
             </div>
         </div>
     </body>

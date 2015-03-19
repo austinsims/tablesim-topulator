@@ -6,6 +6,12 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
     // or perhaps a property of the ui object
     var username;
 
+    var composeUserlistHtml = function(userlist) {
+    	return userlist.map(function(u) {
+    		return '<li>' + u + '</li>';
+    	}).join('');
+    }
+
 	return {
 		init: function() {
 
@@ -23,11 +29,15 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
 			});
 
 			socket.on('chat message', function(msg) {
+				// Append message
 				$('#messages').append($('<li>').text(msg.username + ': ' + msg.message));
+				// Scroll to bottom
+				var el = $('#messages').get(0);
+				el.scrollTop = el.scrollHeight;
 			});
 
-			socket.on('userlist', function(msg) {
-				console.log('userlist: ' + msg);
+			socket.on('userlist', function(userlist) {
+				$('#userlist').html(composeUserlistHtml(userlist));
 			});
 
 		},

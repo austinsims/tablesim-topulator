@@ -13,10 +13,7 @@ body {
 }
 
 #splash {
-    // position: absolute:
-    // top: 50px;
-    // left: 50px;
-    // z-index: 1;
+    padding: 1em;
 }
 
 #threejs-container {
@@ -38,7 +35,29 @@ canvas {
     display: table-cell;
     vertical-align: top;
     width: 20%;
-    padding: 0.5em;
+    height: 100%;
+    padding: 0;
+
+    div#controls {
+        height: 15%;
+        overflow-y: scroll;
+    }
+
+    ul#messages {
+        height: 80%;
+        margin-top: 0;
+        overflow-y: scroll;
+    }
+
+    form {
+        display:block;
+        vertical-align: bottom;
+        height: 5%;
+    }
+
+    h4 {
+        margin: 0;
+    }
 }
 
 .chat-expand-collapse-button {

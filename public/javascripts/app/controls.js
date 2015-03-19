@@ -4,7 +4,6 @@ define(["three", "lodash", "camera", "container", "renderer", "objects", "moveab
     var PICK_UP_LENGTH = 3;
 
     var controls = new THREE.OrbitControls(camera, container);
-    var projector = new THREE.Projector();
 
     // Utility functions
 
@@ -21,7 +20,7 @@ define(["three", "lodash", "camera", "container", "renderer", "objects", "moveab
             1
         );
 
-        projector.unprojectVector(pMouse, camera);
+        pMouse.unproject(camera);
 
         var cam = camera.position;
         var m = pMouse.y / (pMouse.y - cam.y);
