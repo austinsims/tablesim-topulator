@@ -12,6 +12,12 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
     	}).join('');
     }
 
+    var composeMessageListHtml = function(messagelist) {
+      return messagelist.map(function(msg) {
+				return '<li>' + msg.username + ': ' + msg.message + '</li>';
+      }).join('');
+    }
+
 	return {
 		init: function() {
 
@@ -40,20 +46,24 @@ define(["jquery", "container", "camera", "socket"], function($, container, camer
 				$('#userlist').html(composeUserlistHtml(userlist));
 			});
 
+      socket.on('messagelist', function(messagelist) {
+        $('#messages').html(composeMessageListHtml(messagelist));
+      });
+
 		},
 
 		register: function() {
 			var deferred = $.Deferred();
 
-	        // username registration
-	        var register = function() {
+	    // username registration
+	    var register = function() {
 				username = $('input[name=username]').val();
 				
 				// TODO: Use html5 form validation for this
 				if (!username) {
 					alert('Please type a username.');
-					return;
-				}
+			    return;
+			  }
 
 				socket.emit('registration', {
 					username: username

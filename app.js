@@ -13,7 +13,7 @@ var SocketioServer = require('socket.io');
 
 var fs = require('fs');
 var hbs = require('handlebars');
-var partials = "./views/partials/";
+var partials = "./views/";
 
 var lessMiddleware = require('less-middleware');
 
@@ -79,7 +79,9 @@ server.listen(app.get('port'), function(){
 var redisClient = redis.createClient();
 redisClient.on('connect', function() {
   var userlist = [];
+  var messagelist = [];
   redisClient.set('userlist', JSON.stringify(userlist));
+  redisClient.set('messagelist', JSON.stringify(messagelist));
 });
 
 // web sockets
@@ -88,7 +90,7 @@ io.on('connection', function(socket) {
   var username;
 
   console.log('a user connected');
-
+  
   socket.on('disconnect', function() {
     console.log('a user disconnected');
     if (!username) return;
@@ -104,11 +106,18 @@ io.on('connection', function(socket) {
 
   socket.on('registration', function(msg) {
     username = msg.username;
+
     redisClient.get('userlist', function(err, reply) {
       var userlist = JSON.parse(reply);
       userlist.push(username);
       redisClient.set('userlist', JSON.stringify(userlist));
       io.emit('userlist', userlist);
+    });
+
+    redisClient.get('messagelist', function(err, reply) {
+      var messagelist = JSON.parse(reply);
+      console.log(messagelist);
+      io.emit('messagelist', messagelist);
     });
   });
 
@@ -120,6 +129,15 @@ io.on('connection', function(socket) {
     // client side list before server deals with it.
     // broadcast message to all clients except the sender
     // socket.broadcast.emit(msg);
+    
+    // maintain messages sent through redis
+    redisClient.get('messagelist', function(err, reply) {
+      var messagelist = JSON.parse(reply);
+      messagelist.push(msg);
+
+      //console.log(messagelist);
+      redisClient.set('messagelist', JSON.stringify(messagelist));
+    });
 
     // for simplicity, send message to all connected clients including the sender
     io.emit('chat message', msg);
@@ -127,6 +145,7 @@ io.on('connection', function(socket) {
 
   socket.on('move', function(msg) {
     console.log(JSON.stringify(msg));
+    // TODO: maintain the location of the card through redis
     socket.broadcast.emit('move', msg);
   });
 

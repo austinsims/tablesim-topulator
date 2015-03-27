@@ -7,3 +7,6 @@ node_modules
 *.log
 public/bower_components
 public/stylesheets
+
+*.swp
+*.rdb
