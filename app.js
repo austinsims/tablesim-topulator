@@ -116,7 +116,6 @@ io.on('connection', function(socket) {
 
     redisClient.get('messagelist', function(err, reply) {
       var messagelist = JSON.parse(reply);
-      console.log(messagelist);
       io.emit('messagelist', messagelist);
     });
   });
