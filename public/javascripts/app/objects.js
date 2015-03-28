@@ -16,11 +16,11 @@ define(["three", "geometry", "material"], function(THREE, geometry, material) {
     centerOnOrigin(objects.board);
 
     objects.card = new THREE.Mesh(geometry.card, material.card);
-
-
+    objects.deck = new THREE.Mesh(geometry.deck, material.deck);
 
     // *** debug ***
     window.card = objects.card;
+    window.deck = objects.deck;
     // ******
 
     return objects;

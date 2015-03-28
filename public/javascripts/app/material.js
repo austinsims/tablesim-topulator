@@ -27,6 +27,11 @@ define( ["three", "shader!simple.vert", "shader!simple.frag", "texture"], functi
     card: new THREE.MeshPhongMaterial({
       shininess: 0,
       map: texture.card
+    }),
+
+    deck: new THREE.MeshPhongMaterial({
+      shininess: 0,
+      map: texture.deck
     })
   };
 });

@@ -59,7 +59,7 @@ define(["three", "lodash", "camera", "container", "renderer", "objects", "moveab
 
         // Look for an object to pick up. (for now the only object to check is one card)
         // TODO: Move "moveableObjects" to objects.js, somewhere else in this file, or its own
-        var moveableObjects = [moveables.card];
+        var moveableObjects = [moveables.card, moveables.deck];
         pickedUpMoveable = _.find(moveableObjects, function(moveable) {
         	return isPosOnObject({pos: mouse3d, object: moveable.object});
         });

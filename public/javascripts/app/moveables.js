@@ -39,7 +39,8 @@ define(["objects", "socket", "lodash"], function(objects, socket, _) {
 	};
 
 	var moveables = {
-		card: new Moveable(objects.card)
+		card: new Moveable(objects.card),
+    deck: new Moveable(objects.deck)
 	};
 
 

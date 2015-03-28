@@ -34,6 +34,7 @@ define(
 
                 scene.add(objects.board);
                 scene.add(objects.card);
+                scene.add(objects.deck);
 
             },
             animate: function() {

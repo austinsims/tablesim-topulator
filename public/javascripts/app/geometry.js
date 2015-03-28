@@ -20,7 +20,7 @@ define([
 	        board: loader.parse(boardJson).geometry,
 	        piece: loader.parse(pieceJson).geometry,
 	        card: loader.parse(cardJson).geometry,
-          //deck: loader.parse(deckJson).geometry
+          deck: loader.parse(deckJson).geometry
 	    };
 	}
 );

@@ -4,5 +4,6 @@ define( ["three"], function ( THREE ) {
     grass: THREE.ImageUtils.loadTexture( texturePath + "grass.png" ),
     board: THREE.ImageUtils.loadTexture( texturePath + "board.jpg" ),
     card: THREE.ImageUtils.loadTexture( texturePath + "7_of_diamonds.png" ),
+    deck: THREE.ImageUtils.loadTexture( texturePath + "back_of_card.png" ),
   };
 });
