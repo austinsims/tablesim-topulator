@@ -80,8 +80,11 @@ var redisClient = redis.createClient();
 redisClient.on('connect', function() {
   var userlist = [];
   var messagelist = [];
+  var objectlist = {};
+
   redisClient.set('userlist', JSON.stringify(userlist));
   redisClient.set('messagelist', JSON.stringify(messagelist));
+  redisClient.set('objectlocations', JSON.stringify(messagelist));
 });
 
 // web sockets
@@ -107,6 +110,7 @@ io.on('connection', function(socket) {
   socket.on('registration', function(msg) {
     username = msg.username;
 
+    // load the user list
     redisClient.get('userlist', function(err, reply) {
       var userlist = JSON.parse(reply);
       userlist.push(username);
@@ -114,9 +118,16 @@ io.on('connection', function(socket) {
       io.emit('userlist', userlist);
     });
 
+    // load the message list
     redisClient.get('messagelist', function(err, reply) {
       var messagelist = JSON.parse(reply);
       io.emit('messagelist', messagelist);
+    });
+
+    // load the state of the table
+    redisClient.get('objectlocations', function(err, reply) {
+      var objectlist = JSON.parse(reply);
+      io.emit('objectlocations', objectlist);
     });
   });
 
@@ -143,8 +154,16 @@ io.on('connection', function(socket) {
   });
 
   socket.on('move', function(msg) {
-    console.log(JSON.stringify(msg));
-    // TODO: maintain the location of the card through redis
+    // TODO: maintain the location of the objects through redis
+
+    //console.log("id: " + msg.obj_id + "pos: " + msg.pos)
+    redisClient.get('objectlocations', function(err, reply) {
+      var objectlist = JSON.parse(reply);
+      // determine the correct way to maintain the objects in redis here
+
+      redisClient.set('objectlocations', JSON.stringify(objectlist));
+    });
+
     socket.broadcast.emit('move', msg);
   });
 

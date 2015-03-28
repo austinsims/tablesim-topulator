@@ -23,17 +23,20 @@ define(["objects", "socket", "lodash"], function(objects, socket, _) {
 			if (now - self.lastEmittedTime > RATE) {
 				self.lastEmittedTime = now;
 				socket.emit('move', {
-					x: x,
-					y: y,
-					z: z
+          obj_id: object.uuid,
+          pos: {
+					  x: x,
+					  y: y,
+					  z: z
+          }
 				});
 			}
 		};
 
 		socket.on('move', function(msg) {
-			self.object.position.x = msg.x;
-			self.object.position.y = msg.y;
-			self.object.position.z = msg.z;
+			self.object.position.x = msg.pos.x;
+			self.object.position.y = msg.pos.y;
+			self.object.position.z = msg.pos.z;
 		});
 
 	};
