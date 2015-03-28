@@ -84,7 +84,7 @@ redisClient.on('connect', function() {
 
   redisClient.set('userlist', JSON.stringify(userlist));
   redisClient.set('messagelist', JSON.stringify(messagelist));
-  redisClient.set('objectlocations', JSON.stringify(messagelist));
+  redisClient.set('objectlocations', JSON.stringify(objectlist));
 });
 
 // web sockets
@@ -160,7 +160,7 @@ io.on('connection', function(socket) {
     redisClient.get('objectlocations', function(err, reply) {
       var objectlist = JSON.parse(reply);
       // determine the correct way to maintain the objects in redis here
-
+      objectlist[msg.obj_id] = msg.pos;
       redisClient.set('objectlocations', JSON.stringify(objectlist));
     });
 
