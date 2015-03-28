@@ -84,7 +84,7 @@ redisClient.on('connect', function() {
 
   redisClient.set('userlist', JSON.stringify(userlist));
   redisClient.set('messagelist', JSON.stringify(messagelist));
-  redisClient.set('objectlocations', JSON.stringify(objectlist));
+  redisClient.set('objectlist', JSON.stringify(objectlist));
 });
 
 // web sockets
@@ -125,9 +125,10 @@ io.on('connection', function(socket) {
     });
 
     // load the state of the table
-    redisClient.get('objectlocations', function(err, reply) {
+    redisClient.get('objectlist', function(err, reply) {
       var objectlist = JSON.parse(reply);
-      io.emit('objectlocations', objectlist);
+      
+      io.emit('objectlist', objectlist);
     });
   });
 
@@ -157,11 +158,11 @@ io.on('connection', function(socket) {
     // TODO: maintain the location of the objects through redis
 
     //console.log("id: " + msg.obj_id + "pos: " + msg.pos)
-    redisClient.get('objectlocations', function(err, reply) {
+    redisClient.get('objectlist', function(err, reply) {
       var objectlist = JSON.parse(reply);
       // determine the correct way to maintain the objects in redis here
       objectlist[msg.obj_id] = msg.pos;
-      redisClient.set('objectlocations', JSON.stringify(objectlist));
+      redisClient.set('objectlist', JSON.stringify(objectlist));
     });
 
     socket.broadcast.emit('move', msg);
